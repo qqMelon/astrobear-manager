@@ -1,0 +1,31 @@
+name: Deploy to remote server
+
+on:
+  push:
+    branches: [trunk]
+
+jobs:
+  deploy:
+    name: Deploy via SSH
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: RSYNC updated files to remote server
+        run: |
+          rsync -avhP --delete \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            ./Caddyfile ./docker-compose.yml ./extensions \
+            ${{ secrets.REMOTE_CONNECTION }}:/root/astrobear-site/backend
+
+      - name: Restart docker compose
+        run: |
+          ssh -tt -o StrictHostKeyChecking=no ${{ secrets.REMOTE_CONNECTION }} \
+            "cd /root/astrobear-site/backend && docker compose down && docker compose up -d"
