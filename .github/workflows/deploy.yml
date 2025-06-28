@@ -28,4 +28,4 @@ jobs:
       - name: Restart docker compose
         run: |
           ssh -tt -o StrictHostKeyChecking=no ${{ secrets.REMOTE_CONNECTION }} \
-            "cd /root/astrobear-site/backend && docker compose down && docker compose up -d"
+            "cd /root/astrobear-site/backend && docker compose down > /dev/null 2>&1 && docker compose up -d > /dev/null 2>&1"

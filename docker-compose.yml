@@ -71,7 +71,7 @@ services:
       PUBLIC_URL: "https://dev.admin.astrobear.fr"
 
       CORS_ENABLED: "true"
-      CORS_ORIGIN: "https://dev.astrobear.fr, http://localhost:5173"
+      CORS_ORIGIN: "http://localhost:5173"
 
   caddy:
     image: caddy:latest
