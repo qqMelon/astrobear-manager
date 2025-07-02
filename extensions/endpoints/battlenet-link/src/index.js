@@ -1,10 +1,6 @@
 const fetch = require('node-fetch');
 
-export default (router) => {
-	router.get('/test', (req, res) => res.send('Concluant test !'));
-}
-
-module.exports = function registerEndpoint(router, { services, env }) {
+export default (router, { services, env }) {
   const { UsersService } = services;
 
   router.post('/', async (req, res) => {
