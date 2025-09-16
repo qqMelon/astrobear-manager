@@ -22,7 +22,7 @@ jobs:
         run: |
           rsync -avhP --delete \
             -e "ssh -o StrictHostKeyChecking=no" \
-            ./Caddyfile ./docker-compose.yml ./extensions \
+            ./Caddyfile ./docker-compose.yml ./extensions ./maintenance \
             ${{ secrets.REMOTE_CONNECTION }}:/root/astrobear-site/backend
 
       - name: Restart docker compose

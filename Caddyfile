@@ -13,5 +13,8 @@ dev.astrobear.fr {
     Access-Control-Allow-Credentials true
   }
 
-  reverse_proxy frontend:5173
+  root * /srv/maintenance
+  file_server
+
+  # reverse_proxy frontend:5173
 }
