@@ -82,5 +82,6 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./caddy_data:/data
       - ./caddy_config:/config
+      - ./maintenance:/srv/maintenance
     depends_on:
       - directus
